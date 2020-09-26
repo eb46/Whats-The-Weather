@@ -7,6 +7,37 @@
   pointer-events: none;
 }
 
+.forecast-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 5em;
+  padding: 1em;
+  /* overflow: scroll; */
+}
+
+.forecast-card {
+  box-shadow: 1px 1px 10px #dddddd;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 300px;
+  /* margin: 1em;
+  padding: 2em; */
+}
+
+.forecast-card > p {
+  /* width: 200px; */
+}
+
+
+
+
+
+
+
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
