@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 import Forecast from './components/forecast'
 
-const API_key = "807df41e8c0da0836ad0fc7b0630f3e1"
+const API_key = process.env.REACT_APP_API_KEY
 
 class App extends React.Component {
   
