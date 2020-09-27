@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import Forecast from './components/forecast'
+import Input from './components/inputWeather'
 
 const API_key = process.env.REACT_APP_API_KEY
 
@@ -49,14 +50,16 @@ class App extends React.Component {
   render(){   
 
     let currentForecast
+    let maxTemp
+    let minTemp
     
     const temperatureMax = Math.round(this.state.tempMax) || ''
     const temperatureMin = Math.round(this.state.tempMin) || ''
 
     if (this.state.name) {
       currentForecast = <h2>Current Forecast in {this.state.name}</h2>
-    } else {
-      currentForecast = ''
+      maxTemp = <p>Max Temp: {temperatureMax}</p>
+      minTemp = <p>Min Temp: {temperatureMin}</p>
     }
     
     return (
@@ -64,21 +67,14 @@ class App extends React.Component {
         <h1>
           What's the Weather?
         </h1>
-        <form onSubmit={this.getWeather}>
-          <input 
-            onChange={this.handleLocationChange}
-            type="text" 
-            placeholder="Enter city" />
-          <input
-            type="submit"
-            value="Get Weather" />
-        </form>
-          
+        <Input 
+          getWeather={this.getWeather}
+          handleLocationChange={this.handleLocationChange} />        
         <div>
           {currentForecast}
-          <p>Max Temp: {temperatureMax}</p>
-          <p>Min Temp: {temperatureMin}</p>
-          <p>Description: {this.state.description}</p>
+          {maxTemp}
+          {minTemp}
+          <p>{this.state.description}</p>
         </div>
         <Forecast 
           name={this.state.name}

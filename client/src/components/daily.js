@@ -11,7 +11,7 @@ const Daily = (props) => {
         <div className="forecast-card">
             <p>Date: {date}</p>
             <p>Max: {temperatureMax}</p>
-            <p>Min: {temperatureMin}</p>
+            <p>Min Temperature: {temperatureMin}</p>
             <p>{daily.weather[0].description}</p>
         </div>
     )
