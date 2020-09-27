@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import './App.css';
-import Forecast from './components/forecast'
+import FiveDayForecast from './components/fiveDayForecast'
 import Input from './components/inputWeather'
 
 const API_key = process.env.REACT_APP_API_KEY
@@ -76,7 +76,7 @@ class App extends React.Component {
           {minTemp}
           <p>{this.state.description}</p>
         </div>
-        <Forecast 
+        <FiveDayForecast 
           name={this.state.name}
           forecast={this.state.forecast}/>
       </div>

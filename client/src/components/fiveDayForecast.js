@@ -1,7 +1,7 @@
 import React from 'react'
 import Daily from './daily'
 
-const Forecast = (props) => {
+const FiveDayForecast = (props) => {
     const { forecast, name } = props
     let forecastTitle
 
@@ -28,4 +28,4 @@ const Forecast = (props) => {
     )    
 }
 
-export default Forecast
+export default FiveDayForecast
