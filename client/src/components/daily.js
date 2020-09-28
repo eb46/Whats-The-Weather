@@ -6,58 +6,93 @@ import rain from '../images/rainy.png'
 import clearNight from '../images/clear-night.png'
 import cloudyNight from '../images/cloudy-night.png'
 
-
-
 const Daily = (props) => {
     let icon
-    let time
+    let standardTime
+    let date
 
     const { daily } = props
 
-    const dateArray = daily.dt_txt.split(' ')
+    console.log(daily.dt_txt);
 
-    const standardTime = dateArray[1].split(':')[0].replace(0,'')
+    const dateAndTimeArray = daily.dt_txt.split(' ')
+    const dateSplit = dateAndTimeArray[0].split('-')
+    const militaryTime = dateAndTimeArray[1].split(':')[0].replace(0,'')
 
-    if ((standardTime - 12) === -12) {
-        time = `12 AM`
-    }  else if ((standardTime - 12) === 0){
-        time = `12 Noon`
-    }  else if (standardTime < 12) {
-        time = `${standardTime} AM`
+    // sets time format to be displayed on each forecast card
+    if ((militaryTime - 12) === -12) {
+        standardTime = `12 AM`
+    }  else if ((militaryTime - 12) === 0){
+        standardTime = `12 Noon`
+    }  else if (militaryTime < 12) {
+        standardTime = `${militaryTime} AM`
     }  else {
-        time = `${standardTime - 12} PM`
+        standardTime = `${militaryTime - 12} PM`
     }
 
-    const date = dateArray[0]
-    const temperatureMax = Math.round(daily.main.temp_max) || ''
-    const temperatureMin = Math.round(daily.main.temp_min) || ''
-    const description = daily.weather[0].description
+    const temperatureMax = `${Math.round(daily.main.temp_max)}°` || ''
+    const temperatureMin = `${Math.round(daily.main.temp_min)}°` || ''
+    const description = daily.weather[0].description.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())));
 
-    // console.log(parseInt(time));
+    // sets date format to be displayed on each forecast card
+    if (dateSplit[1] === '01'){
+        date = `Jan ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '02') {
+        date = `Feb ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '03') {
+        date = `Mar ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '04') {
+        date = `Apr ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '05') {
+        date = `May ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '06') {
+        date = `Jun ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '07') {
+        date = `Jul ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '08') {
+        date = `Aug ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '09') {
+        date = `Sep ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '10') {
+        date = `Oct ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '11') {
+        date = `Nov ${dateSplit[2]}`
+    }   else if (dateSplit[1] === '12') {
+        date = `Dec ${dateSplit[2]}`
+    }
 
-
-    if ((parseInt(time) >= 18 || parseInt(time) <= 6) && description.includes('clear')) {
+    // if statements to handle which icons appear on each daily forecast card
+    if ((parseInt(militaryTime) >= 18 || parseInt(militaryTime) <= 6) && description.toLowerCase().includes('clear')) {
             icon = <img src={clearNight} alt='night'/>
-    }   else if (parseInt(time) >= 18 && description.includes('clouds')) {
+    }   else if (parseInt(militaryTime) >= 18 && description.toLowerCase().includes('clouds')) {
             icon = <img src={cloudyNight} alt='night'/>
-    }   else if (description.includes('clouds')) {
+    }   else if (description.toLowerCase().includes('clouds')) {
             icon = <img src={partlyCloudy} alt='partly cloudy' />
-    }   else if (description.includes('clear')) {
+    }   else if (description.toLowerCase().includes('clear')) {
             icon = <img src={sun} alt='sun'/>
-    }   else if (description.includes('rain')) {
+    }   else if (description.toLowerCase().includes('rain')) {
             icon = <img src={rain} alt='rain'/>
-    }   else if (description.includes('snow')) {
+    }   else if (description.toLowerCase().includes('snow')) {
             icon = <img src={snow} alt='snow'/>
     }
 
-    
+    // <p>Max Temp: {temperatureMax}</p>
+    //         <p>Min Temp: {temperatureMin}</p>
 
     return(
         <div className="forecast-card">
             <p>{date}</p>
-            <p>{time}</p>
-            <p>Max: {temperatureMax}</p>
-            <p>Min: {temperatureMin}</p>
+            <p>{standardTime}</p>
+            <div className="forecast-temp">
+                <div className="temperature">
+                    <p>Min</p>
+                    <p>{temperatureMin}</p>
+                </div>
+                <div className="temperature">
+                    <p>Max</p>
+                    <p>{temperatureMax}</p>
+                </div>
+            </div>
             <p>{description}</p>
             {icon}
         </div>

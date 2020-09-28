@@ -58,8 +58,8 @@ class App extends React.Component {
 
     if (this.state.name) {
       currentForecast = <h2>Current Forecast in {this.state.name}</h2>
-      maxTemp = <p>Max Temp: {temperatureMax}</p>
-      minTemp = <p>Min Temp: {temperatureMin}</p>
+      maxTemp = <p>Max Temp: {temperatureMax}°</p>
+      minTemp = <p>Min Temp: {temperatureMin}°</p>
     }
     
     return (
@@ -74,7 +74,7 @@ class App extends React.Component {
           {currentForecast}
           {maxTemp}
           {minTemp}
-          <p>{this.state.description}</p>
+          <p>{this.state.description.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</p>
         </div>
         <FiveDayForecast 
           name={this.state.name}
