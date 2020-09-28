@@ -4,7 +4,7 @@ import './App.css';
 import FiveDayForecast from './components/fiveDayForecast'
 import Input from './components/inputWeather'
 
-const API_key = process.env.REACT_APP_API_KEY
+// const API_key = process.env.REACT_APP_API_KEY
 
 class App extends React.Component {
   
@@ -19,7 +19,7 @@ class App extends React.Component {
 
   getWeather = (event) => {
     event.preventDefault()
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=imperial&APPID=${API_key}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`)
       .then(response => {
         this.setState({
           weather: response.data,
@@ -30,7 +30,7 @@ class App extends React.Component {
         })
       })
     
-    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${this.state.location}&units=imperial&appid=${API_key}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${this.state.location}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
       .then(response => {
         this.setState({
           forecast: response.data.list
