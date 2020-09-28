@@ -19,7 +19,7 @@ class App extends React.Component {
 
   getWeather = (event) => {
     event.preventDefault()
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=imperial&APPID=${API_key}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=imperial&APPID=${API_key}`)
       .then(response => {
         this.setState({
           weather: response.data,
@@ -30,7 +30,7 @@ class App extends React.Component {
         })
       })
     
-    axios.get(`http://api.openweathermap.org/data/2.5/forecast?q=${this.state.location}&units=imperial&appid=${API_key}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${this.state.location}&units=imperial&appid=${API_key}`)
       .then(response => {
         this.setState({
           forecast: response.data.list
