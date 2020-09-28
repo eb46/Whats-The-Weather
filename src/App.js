@@ -4,8 +4,6 @@ import './App.css';
 import FiveDayForecast from './components/fiveDayForecast'
 import Input from './components/inputWeather'
 
-// const API_key = process.env.REACT_APP_API_KEY
-
 class App extends React.Component {
   
   state = {
