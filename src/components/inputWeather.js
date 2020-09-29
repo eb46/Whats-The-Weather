@@ -5,13 +5,15 @@ const Input = (props) => {
     return (
         <>
             <form onSubmit={getWeather}>
-            <input 
-                onChange={handleLocationChange}
-                type="text" 
-                placeholder="Enter city" />
-            <input
-                type="submit"
-                value="Get Weather" />
+                <input
+                    className="input-field"
+                    onChange={handleLocationChange}
+                    type="text" 
+                    placeholder="Enter city" />
+                <input 
+                    className="submit-button"
+                    type="submit"
+                    value="Get Weather" />
             </form>
         </>
     ) 

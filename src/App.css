@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&family=Roboto+Condensed&display=swap');
+
 .App {
   text-align: center;
   display: flex;
@@ -5,11 +7,35 @@
   justify-content: center;
   align-items: center;
   align-content: center;
+  font-family: 'Roboto Condensed';
+  font-size: 18px;
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
+}
+
+nav {
+  background-color: white;
+  margin-bottom: 2em;
+  width: 100%;
+}
+
+.input-field {
+  padding: 14px;
+  margin-right: 5px;
+  font-size: 16px;
+}
+
+.submit-button {
+  background-color: #191970;
+  color: white;
+  font-size: 15px;
+  padding: 18px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 25px;
 }
 
 .forecast-container {

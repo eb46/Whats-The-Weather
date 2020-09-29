@@ -2,7 +2,9 @@ import React from 'react';
 import axios from 'axios';
 import './App.css';
 import FiveDayForecast from './components/fiveDayForecast'
+import Nav from './components/nav'
 import Input from './components/inputWeather'
+import CurrentForecast from './components/currentForecast'
 
 class App extends React.Component {
   
@@ -12,7 +14,8 @@ class App extends React.Component {
     tempMax: '',
     tempMin: '',
     description: '',
-    forecast: []
+    forecast: [],
+    error: false
   }
 
   getWeather = (event) => {
@@ -27,6 +30,11 @@ class App extends React.Component {
           name: response.data.name,
         })
       })
+      .catch(error => {
+        this.setState({
+          error: true
+        })
+      })
     
     axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${this.state.location}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
       .then(response => {
@@ -35,13 +43,19 @@ class App extends React.Component {
         })
         console.log(response.data.list);
       })
+      .catch(error => {
+        this.setState({
+          error: true
+        })
+      })
 
     event.target.reset()
   }
 
   handleLocationChange = (event) => {
     this.setState({
-      location: event.target.value
+      location: event.target.value,
+      error: false
     })
   }
   
@@ -50,7 +64,7 @@ class App extends React.Component {
     let currentForecast
     let maxTemp
     let minTemp
-    
+
     const temperatureMax = Math.round(this.state.tempMax) || ''
     const temperatureMin = Math.round(this.state.tempMin) || ''
 
@@ -62,18 +76,20 @@ class App extends React.Component {
     
     return (
       <div className="App">
-        <h1>
-          What's the Weather?
-        </h1>
-        <Input 
-          getWeather={this.getWeather}
-          handleLocationChange={this.handleLocationChange} />        
-        <div>
-          {currentForecast}
-          {maxTemp}
-          {minTemp}
-          <p>{this.state.description.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</p>
-        </div>
+        <div className="nav-bar">
+          <Nav />
+          <Input 
+            getWeather={this.getWeather}
+            handleLocationChange={this.handleLocationChange} /> 
+        </div>     
+        <CurrentForecast 
+          description={this.state.description}
+          maxTemp={maxTemp}
+          minTemp={minTemp}
+          currentForecast={currentForecast}
+          error={this.state.error}
+          location={this.state.location}
+          />
         <FiveDayForecast 
           name={this.state.name}
           forecast={this.state.forecast}/>
