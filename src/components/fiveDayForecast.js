@@ -6,7 +6,12 @@ const FiveDayForecast = (props) => {
     let forecastTitle
 
     if (name) {
-        forecastTitle = <h2>5 Day Forecast</h2>
+        forecastTitle = (
+            <>
+                <h2>5 Day Forecast</h2>
+                <h2>Scroll to view more</h2>
+            </>
+        )
     }  
 
     // let showForecast = forecast.splice(1, 5)
