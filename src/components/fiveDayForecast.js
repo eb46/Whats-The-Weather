@@ -9,7 +9,7 @@ const FiveDayForecast = (props) => {
         forecastTitle = (
             <>
                 <h2>5 Day Forecast</h2>
-                <h2>Scroll to view more</h2>
+                <h3>Scroll right to view more</h3>
             </>
         )
     }  
