@@ -32,7 +32,11 @@ class App extends React.Component {
       })
       .catch(error => {
         this.setState({
-          error: true
+          error: true,
+          tempMax: '',
+          tempMin: '',
+          description: '',
+          name: ''
         })
       })
     
@@ -45,17 +49,23 @@ class App extends React.Component {
       })
       .catch(error => {
         this.setState({
-          error: true
+          error: true,
+          forecast: [],
+          tempMax: '',
+          tempMin: '',
+          description: '',
+          name: ''
         })
       })
 
+    // clears text within input field
     event.target.reset()
   }
 
   handleLocationChange = (event) => {
     this.setState({
       location: event.target.value,
-      error: false
+      error: false,
     })
   }
   
@@ -90,7 +100,8 @@ class App extends React.Component {
           error={this.state.error}
           location={this.state.location}
           />
-        <FiveDayForecast 
+        <FiveDayForecast
+          error={this.state.error}
           name={this.state.name}
           forecast={this.state.forecast}/>
       </div>

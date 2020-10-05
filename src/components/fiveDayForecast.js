@@ -2,8 +2,9 @@ import React from 'react'
 import Daily from './daily'
 
 const FiveDayForecast = (props) => {
-    const { forecast, name } = props
+    const { error, forecast, name } = props
     let forecastTitle
+    let forecastDashboard
 
     if (name) {
         forecastTitle = (
@@ -14,21 +15,28 @@ const FiveDayForecast = (props) => {
         )
     }  
 
-    // let showForecast = forecast.splice(1, 5)
-    // console.log(showForecast);
+    if (error) {
+        forecastDashboard = null
+    }   else {
+        forecastDashboard = (
+            <>
+                {forecastTitle}
+                <div className="forecast-container">
+                    {forecast.map((daily, index) => 
+                        <Daily 
+                            key={index}
+                            daily={daily} />
+                    )}
+                </div>
+            </>
+        )
+    }
 
     console.log(forecast);
 
     return(
         <>
-            {forecastTitle}
-            <div className="forecast-container">
-                {forecast.map((daily, index) => 
-                    <Daily 
-                        key={index}
-                        daily={daily} />
-                )}
-            </div>
+            {forecastDashboard}  
         </>
     )    
 }

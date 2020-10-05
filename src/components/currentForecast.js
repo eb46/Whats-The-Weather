@@ -6,13 +6,16 @@ const CurrentForecast = (props) => {
     const errorMessage = <h4>{location} does not exist. Enter valid city.</h4>
 
     return(
-        <div>
-          {error ? errorMessage : null} 
-          {currentForecast}
-          {maxTemp}
-          {minTemp}
-          <p>{description.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</p>
-        </div>
+      <>
+        {error ? errorMessage : 
+          <div className="current-forecast">
+            {currentForecast}
+            {maxTemp}
+            {minTemp}
+            <p>{description.trim().toLowerCase().replace(/\w\S*/g, (w) => (w.replace(/^\w/, (c) => c.toUpperCase())))}</p>
+          </div>
+        } 
+      </>
     )
 }
 
