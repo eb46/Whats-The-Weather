@@ -13,8 +13,6 @@ class App extends React.Component {
     location: '',
     tempMax: '',
     tempMin: '',
-    // tempMeasure: '',
-    // tempMeasureSwitch: false,
     description: '',
     forecast: [],
     error: false
@@ -22,7 +20,7 @@ class App extends React.Component {
 
   getWeather = (event) => {
     event.preventDefault()
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=${this.state.tempMeasure}&APPID=${process.env.REACT_APP_API_KEY}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`)
       .then(response => {
         this.setState({
           weather: response.data,
