@@ -13,6 +13,8 @@ class App extends React.Component {
     location: '',
     tempMax: '',
     tempMin: '',
+    // tempMeasure: '',
+    // tempMeasureSwitch: false,
     description: '',
     forecast: [],
     error: false
@@ -20,7 +22,7 @@ class App extends React.Component {
 
   getWeather = (event) => {
     event.preventDefault()
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${this.state.location}&units=${this.state.tempMeasure}&APPID=${process.env.REACT_APP_API_KEY}`)
       .then(response => {
         this.setState({
           weather: response.data,
@@ -62,6 +64,22 @@ class App extends React.Component {
     event.target.reset()
   }
 
+  // handleMeasurement = () => {
+  //   let measurement
+
+  //   if (this.state.tempMeasureSwitch) {
+  //     measurement = 'standard'
+  //   } else if (this.state.tempMeasureSwitch === false) {
+  //     measurement = 'imperial'
+  //   }
+  //   this.setState({
+  //     tempMeasure: measurement,
+  //     tempMeasureSwitch: !this.state.tempMeasureSwitch
+  //   })
+
+  //   console.log(measurement)
+  // }
+
   handleLocationChange = (event) => {
     this.setState({
       location: event.target.value,
@@ -90,7 +108,8 @@ class App extends React.Component {
           <Nav />
           <Input 
             getWeather={this.getWeather}
-            handleLocationChange={this.handleLocationChange} /> 
+            handleLocationChange={this.handleLocationChange} 
+            handleMeasurement={this.handleMeasurement} /> 
         </div>     
         <CurrentForecast 
           description={this.state.description}
